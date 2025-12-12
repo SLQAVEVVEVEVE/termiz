@@ -25,7 +25,7 @@ export function Header() {
           href="#hero"
           className="font-sans text-xl font-semibold tracking-tight text-foreground"
         >
-          Термиз
+          ООО НПФ «Термостойкие изделия»
         </Link>
         <div className="hidden items-center gap-6 md:flex">
           <NavigationMenu viewport={false}>
@@ -45,7 +45,7 @@ export function Header() {
               ))}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/40">
-                  Информация
+                  Дополнительно
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="min-w-[220px] rounded-xl border border-border/60 bg-background p-3 shadow-lg">
                   <div className="flex flex-col gap-2">
@@ -53,7 +53,7 @@ export function Header() {
                       href="#articles"
                       className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted/60 hover:text-foreground"
                     >
-                      Публикации
+                      Статьи
                     </NavigationMenuLink>
                     <NavigationMenuLink
                       href="#patents"
@@ -67,11 +67,11 @@ export function Header() {
             </NavigationMenuList>
           </NavigationMenu>
           <Button asChild size="sm">
-            <Link href="#contact">Оставить заявку</Link>
+            <Link href="#contact">Связаться</Link>
           </Button>
         </div>
         <Button asChild size="sm" className="md:hidden" variant="outline">
-          <Link href="#contact">Заявка</Link>
+          <Link href="#contact">Связаться</Link>
         </Button>
       </div>
     </header>

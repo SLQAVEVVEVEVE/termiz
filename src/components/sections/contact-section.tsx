@@ -1,22 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
-import { contactSchema, type ContactValues } from "@/lib/validation/contact"
+import { useEffect, useRef } from "react"
 
 type YandexMapsApi = {
   Map: new (
@@ -137,43 +121,6 @@ function YandexMap() {
 }
 
 export function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const form = useForm<ContactValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", phone: "", message: "" },
-  })
-
-  const onSubmit = async (values: ContactValues) => {
-    try {
-      setIsSubmitting(true)
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(values),
-      })
-
-      if (!response.ok) {
-        throw new Error("Ошибка при отправке. Попробуйте ещё раз.")
-      }
-
-      toast({
-        title: "Заявка отправлена",
-        description: "Мы свяжемся с вами в течение рабочего дня.",
-      })
-      form.reset()
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Не удалось отправить форму."
-      toast({
-        variant: "destructive",
-        title: "Не получилось отправить",
-        description: message,
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
   return (
     <section id="contact" className="border-t border-border/60 bg-muted/20">
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
@@ -182,100 +129,34 @@ export function ContactSection() {
             Контакты
           </p>
           <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Свяжитесь с инженерами «Термиз»
+            Свяжитесь с нами
           </h2>
           <p className="text-base text-muted-foreground">
             Оставьте заявку — подберём материалы под вашу задачу и подготовим
             расчёт в течение одного рабочего дня.
           </p>
         </div>
-
-        <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-12">
-          <div className="rounded-3xl border border-border/60 bg-background p-6 shadow-lg sm:p-8">
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-5"
-                aria-label="Форма обратной связи"
-              >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Имя</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Например: Анна Петрова"
-                          autoComplete="name"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Телефон</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="+7 (900) 000-00-00"
-                          inputMode="tel"
-                          autoComplete="tel"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Сообщение</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          rows={4}
-                          placeholder="Расскажите о проекте или задаче"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Отправляем..." : "Отправить заявку"}
-                </Button>
-              </form>
-            </Form>
-          </div>
-
+        <div className="mt-12 grid gap-10 lg:grid-cols-1 lg:gap-12">
           <div className="flex flex-col justify-between gap-8 rounded-3xl border border-border/60 bg-background p-6 shadow-lg sm:p-8">
             <div className="space-y-6 text-left">
               <div className="space-y-2">
                 <p className="text-sm uppercase tracking-[0.2em] text-primary/80">
                   Телефон
                 </p>
-                <a
-                  href="tel:+74951234567"
-                  className="text-2xl font-semibold text-foreground transition hover:text-primary"
-                >
-                  +7 (495) 123-45-67
-                </a>
+                <div className="flex flex-col gap-1">
+                  <a
+                    href="tel:+74955833867"
+                    className="text-2xl font-semibold text-foreground transition hover:text-primary"
+                  >
+                    +7 (495) 583-38-67
+                  </a>
+                  <a
+                    href="tel:+74955825242"
+                    className="text-lg font-semibold text-foreground transition hover:text-primary"
+                  >
+                    +7 (495) 582-52-42
+                  </a>
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -283,10 +164,10 @@ export function ContactSection() {
                   E-mail
                 </p>
                 <a
-                  href="mailto:info@termiz.ru"
+                  href="mailto:termiz@mail.ru"
                   className="text-lg font-medium text-foreground transition hover:text-primary"
                 >
-                  info@termiz.ru
+                  termiz@mail.ru
                 </a>
               </div>
 

@@ -3,61 +3,15 @@ import Link from "next/link"
 
 import { ContactSection } from "@/components/sections/contact-section"
 import { articles, type ArticleItem } from "@/data/articles"
-import {
-  additionalPatents,
-  primaryPatents,
-  type PatentItem,
-} from "@/data/patents"
 import { products } from "@/data/products"
 import { Button } from "@/components/ui/button"
+import { PatentsSection } from "@/components/sections/patents-section"
 
 export default function Home() {
   const featuredArticles = articles.slice(0, 6)
   const additionalArticles = articles.slice(6)
 
-  const renderPatentCard = (
-    patent: PatentItem,
-    variant: "primary" | "secondary",
-  ) => {
-    const isPrimary = variant === "primary"
-
-    return (
-      <article
-        key={patent.slug}
-        className={`flex h-full flex-col items-center ${
-          isPrimary
-            ? "rounded-3xl border border-border/60 bg-background p-4 shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
-            : "rounded-2xl bg-background p-3 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-        }`}
-      >
-        <div
-          className={`relative overflow-hidden bg-muted/20 ${
-            isPrimary ? "rounded-[26px]" : "rounded-2xl"
-          } aspect-[3/4] w-full`}
-        >
-          {patent.image ? (
-            <Image
-              src={patent.image}
-              alt={patent.title}
-              fill
-              className="object-contain object-center"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center px-6 text-center text-xs text-muted-foreground/80">
-              Обложка появится позже
-            </div>
-          )}
-        </div>
-        <span className="sr-only">
-          {patent.title}
-          {patent.number ? `, ${patent.number}` : ""}
-          {patent.year ? `, ${patent.year}` : ""}
-        </span>
-      </article>
-    )
-  }
-
-  const renderArticleCard = (article: ArticleItem) => (
+    const renderArticleCard = (article: ArticleItem) => (
     <article
       key={article.slug}
       className="flex h-full flex-col rounded-2xl border border-border/60 bg-muted/10 p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md"
@@ -109,11 +63,13 @@ export default function Home() {
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
                 Производство в России
               </p>
-              <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-                Высокотехнологичные ткани и материалы
+              <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                ТЕРМОСТОЙКИЕ ТКАНИ И МАТЕРИАЛЫ
               </h1>
               <p className="text-base text-muted-foreground sm:text-lg">
-                Создаём термостойкие ткани, фильтрационные материалы и средства индивидуальной защиты. Более 20 лет обеспечиваем предприятия металлургии, химии и энергетики надёжными решениями для высоких температур.
+                Более 30 лет разрабатываем и производим термостойкие технические ткани,{" "}
+                <br className="hidden sm:block" />
+                материалы и изделия на их основе.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a
@@ -178,7 +134,7 @@ export default function Home() {
               Продукция
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Решения для высоких температур и агрессивных сред
+              Термостойкие материалы и изделия на их основе
             </h2>
             <p className="mx-auto max-w-3xl text-base text-muted-foreground">
               Используем огнестойкие волокна и композиционные материалы, чтобы обеспечить защиту оборудования и персонала при экстремальных нагрузках.
@@ -255,10 +211,7 @@ export default function Home() {
                       >
                         <Link href={`/products/${product.slug}`}>Подробнее</Link>
                       </Button>
-                      <Button asChild className="w-full rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto">
-                        <a href="#contact">{product.cta}</a>
-                      </Button>
-                    </div>
+                                          </div>
                   </div>
                 </article>
               )
@@ -310,35 +263,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <section id="patents" className="border-b border-border/60 bg-muted/20">
-        <div className="mx-auto w-full max-w-6xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
-          <div className="space-y-4 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
-              Патенты
-            </p>
-            <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Ключевые разработки и технологические решения
-            </h2>
-            <p className="mx-auto max-w-3xl text-base text-muted-foreground">
-              Компания «Термиз» защищает инновации патентами: основные документы показаны крупным планом, остальные доступны ниже. Обложки будут обновлены по мере подготовки материалов.
-            </p>
-          </div>
-          <div className="space-y-12">
-            <div className="grid gap-6 lg:grid-cols-3">
-              {primaryPatents.map((patent) => renderPatentCard(patent, "primary"))}
-            </div>
-            <div className="space-y-5">
-              <h3 className="text-center text-sm font-semibold uppercase tracking-[0.25em] text-primary/70">
-                Дополнительные патенты
-              </h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                {additionalPatents.map((patent) => renderPatentCard(patent, "secondary"))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PatentsSection />
 
       <section id="contact" className="bg-background">
         <ContactSection />

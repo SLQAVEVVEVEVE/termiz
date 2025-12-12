@@ -63,71 +63,33 @@ export default async function ProductPage({
           </Button>
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-          <div className="space-y-5">
-            <div
-              className={`grid gap-4 ${
-                images.length > 1 ? "sm:grid-cols-2" : ""
-              }`}
-            >
-              {images.map((image) => (
-                <div
-                  key={image.key}
-                  className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/60 bg-background"
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className={`transition duration-500 hover:scale-[1.02] ${
-                      image.transform
-                    } ${image.fit === "contain" ? "object-contain" : "object-cover"}`}
-                    style={{ objectPosition: image.position }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="rounded-3xl border border-border/60 bg-background p-6 shadow-lg">
-              <p className="text-base leading-relaxed text-muted-foreground">
-                {product.details.description}
-              </p>
-            </div>
-            {product.details.note ? (
-              <div className="rounded-3xl border border-dashed border-primary/40 bg-primary/5 p-6 text-sm text-muted-foreground">
-                {product.details.note}
+        <div className="mt-10 flex flex-col items-center gap-8">
+          <div
+            className={`grid w-full max-w-4xl gap-4 ${
+              images.length > 1 ? "sm:grid-cols-2" : ""
+            }`}
+          >
+            {images.map((image) => (
+              <div
+                key={image.key}
+                className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/60 bg-background"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className={`transition duration-500 hover:scale-[1.02] ${
+                    image.transform
+                  } ${image.fit === "contain" ? "object-contain" : "object-cover"}`}
+                  style={{ objectPosition: image.position }}
+                />
               </div>
-            ) : null}
+            ))}
           </div>
-
-          <div className="space-y-8 rounded-3xl border border-border/60 bg-background p-6 shadow-lg">
-            <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.35ем] text-primary/80">
-                Ключевые возможности
-              </p>
-              <ul className="grid gap-3 text-sm leading-relaxed text-muted-foreground">
-                {product.details.highlights.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-2xl border border-border/40 bg-muted/10 px-4 py-3"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col gap-3 rounded-3xl border border-primary/30 bg-primary/5 p-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm font-semibold text-primary">
-                  Нужен расчёт по этому продукту?
-                </p>
-                <p className="text-xs text-muted-foreground/80">
-                  Оставьте заявку — подготовим технико-коммерческое предложение.
-                </p>
-              </div>
-              <Button asChild className="w-full rounded-2xl sm:w-auto">
-                <Link href="/#contact">Связаться с нами</Link>
-              </Button>
-            </div>
+          <div className="w-full max-w-4xl rounded-3xl border border-border/60 bg-background p-6 text-center shadow-lg">
+            <p className="text-base leading-relaxed text-muted-foreground">
+              {product.details.description}
+            </p>
           </div>
         </div>
 
@@ -171,10 +133,10 @@ export default async function ProductPage({
                           key={`${variant.title}-${spec.label}`}
                           className="flex h-full flex-col gap-2 rounded-2xl border border-border/40 bg-muted/10 px-4 py-4"
                         >
-                          <dt className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/70">
+                          <dt className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70 leading-snug text-balance break-words">
                             {spec.label}
                           </dt>
-                          <dd className="mt-1 text-sm text-foreground">
+                          <dd className="mt-1 text-sm leading-relaxed text-foreground">
                             {spec.value}
                           </dd>
                         </div>
